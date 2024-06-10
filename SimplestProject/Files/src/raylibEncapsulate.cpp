@@ -4,7 +4,7 @@
 
 #define MAX_INPUT_CHARS     9
 
-void demoRaylib(std::string p_sSpeed)
+void demoRaylib(std::string p_sSpeed, unsigned char p_cRed, unsigned char p_cGreen, unsigned char p_cBlue)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ void demoRaylib(std::string p_sSpeed)
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground({p_cRed, p_cGreen, p_cBlue});
 		if(doubleClicked !=0)
 		{
             doubleClicked = enterText(name);

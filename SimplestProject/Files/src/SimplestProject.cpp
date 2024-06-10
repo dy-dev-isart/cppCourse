@@ -7,11 +7,16 @@
 #include "demo/mesFonctions.h"
 
 
-void displayCharAsBitsArray(char c)
+void displayCharAsBitsArray()
 {
+	char a;
+	std::cout << "Enter a character: ";
+	std::cin >> a;
+	std::cout << "The character " << a << "(" << (int)a << ")" << " is represented as: ";
+
 	for (int i = 0; i < 8; ++i)
 	{
-		if (c & (1 << i))
+		if (a & (1 << i))
 		{
 			std::cout << "1";
 		}
@@ -47,27 +52,36 @@ void readSaveChar()
 	offset += 1;
 	char spriteNb = (save >> offset) & 3;// 3 => 0b11 (en binaire)
 	offset += 2;
-	char lives = (save >> offset) &7 ;// 7 => 0b0000_0111 (en binaire)
+	char lives = (save >> offset) & 7;// 7 => 0b0000_0111 (en binaire)
 	offset += 3;
 	char upMiddleDown = (save >> offset) & 3;// 3 => 0b11 (en binaire)
 	std::cout << "LeftRight: " << (int)leftRight << std::endl;
 }
-int main()
+int main(int argc, char* argv[])
 {
+	unsigned int valAsInt = -1;
+	if (argc > 1)
+	{
+		std::stringstream ss;
+		ss << std::hex << argv[1];
+
+		ss >> valAsInt;
+	}
+	unsigned char red = (valAsInt >> 16) & 0xFF;
+	unsigned char green = (valAsInt >> 8) & 0xFF;
+	unsigned char blue = valAsInt & 0xFF;
+
+
 	//helloWorld();
 	//getUserYearExperience();
 	int speed = 0;// whatSpeed();
 
-	char a;
-	std::cout << "Enter a character: ";
-	std::cin >> a;
-	std::cout << "The character " << a << "(" << (int)a << ")" << " is represented as: ";
-	displayCharAsBitsArray(a);
+	//displayCharAsBitsArray();
 	createSaveChar();
 	readSaveChar();
 	//save as a string stream
-	//std::stringstream ss;
+	std::stringstream ss;
 	//ss << "You want to go at " << speed << " km/h.";
-	//demoRaylib(ss.str());
+	demoRaylib(ss.str(), red, green, blue);
 	return 0;
 }
