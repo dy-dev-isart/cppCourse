@@ -83,5 +83,8 @@ int main(int argc, char* argv[])
 	std::stringstream ss;
 	//ss << "You want to go at " << speed << " km/h.";
 	demoRaylib(ss.str(), red, green, blue);
+
+	//getAllPrimes(false, 250000);
+	//getAllPrimes(true, 1000000);
 	return 0;
 }

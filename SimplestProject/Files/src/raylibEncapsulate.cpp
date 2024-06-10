@@ -4,6 +4,12 @@
 
 #define MAX_INPUT_CHARS     9
 
+struct Rock
+{
+	Vector2 position;
+	Vector2 speed;
+	Texture2D* text;
+};
 void demoRaylib(std::string p_sSpeed, unsigned char p_cRed, unsigned char p_cGreen, unsigned char p_cBlue)
 {
     // Initialization
@@ -22,6 +28,7 @@ void demoRaylib(std::string p_sSpeed, unsigned char p_cRed, unsigned char p_cGre
     char name[MAX_INPUT_CHARS + 1] = "\0";
     name[0] = 'a';
     int framesCounter = 0;
+    Rock rock;
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -33,7 +40,12 @@ void demoRaylib(std::string p_sSpeed, unsigned char p_cRed, unsigned char p_cGre
         currentGesture = GetGestureDetected();
         if(currentGesture == GESTURE_DOUBLETAP) 
             doubleClicked = (doubleClicked+1)%2;
-        // Draw
+
+        //Memroy leak demonstration => uncomment to see the memory leak
+        //rock.text = new Texture2D(LoadTexture("resources/rock.png"));
+
+
+    	// Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
         ClearBackground({p_cRed, p_cGreen, p_cBlue});
